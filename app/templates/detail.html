@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Edit</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/styles.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/style.css'%}">
+	<script type="text/javascript" src="{% static 'Bootstrap/js/js.js'%}"></script>
+	<script type="text/javascript" src="{% static 'Bootstrap/js/popper.js'%}"></script>
+	<script type="text/javascript" src="{% static 'Bootstrap/js/jquery.js'%}"></script>
+</head>
+<body>
+<div class="card container m-3 pt-3">
+	<form method="post" class="input-group mb-3">
+		{% csrf_token %}
+		  <div class="input-group-prepend">
+		    <div class="input-group-text">
+		    	{% if item.complete == True %}
+		      		<input  type="checkbox" name = 'complete' aria-label="Checkbox for following text input" checked>
+		    	{%else%}
+		    		<input  type="checkbox" name = 'complete' aria-label="Checkbox for following text input">
+		    	{%endif%}
+		    </div>
+		  </div>
+		  <input required value= {{name}} type="text" name ='text' class="form-control" aria-label="Text input with checkbox">
+		<input type="submit" class="btn btn-outline-dark" name="edit">
+	</form>
+</div>
+</body>
+</html>
+

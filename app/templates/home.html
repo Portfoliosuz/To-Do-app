@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>To Do</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/styles.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/style.css'%}">
+	<script type="text/javascript" src="{% static 'Bootstrap/js/js.js'%}"></script>
+	<script type="text/javascript" src="{% static 'Bootstrap/js/popper.js'%}"></script>
+	<script type="text/javascript" src="{% static 'Bootstrap/js/jquery.js'%}"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+	<div class="place">
+		<div class="nav navbar-light bg-dark navbar">
+			<div class="p-2">To Do List</div>
+			<form method="post" class="input-group mb-3">{% csrf_token%}
+			  <input required type="text" class="form-control" placeholder="Write..." aria-label="Recipient's username" aria-describedby="basic-addon2" name = "add">
+			  <div class="input-group-append">
+			    <input class="btn btn-outline-secondary" name ="button" type="submit"></input>
+			  </div>
+			</form>
+		</div>
+		{% for item in todo%}
+		<div class="row p-2">
+			<div class="col-md-8 btn" style="font-family: 'Roboto', sans-serif;">
+				{% if item.complete == True %}
+					<strike>{{item}}</strike>
+				{% else %}
+					{{item}}
+				{% endif %}
+			</div>
+			<a href = "{% url 'edit' item.id %}" class="col-md-2 btn btn-outline-warning">
+				Edit
+			</a>
+			<a href= "{% url 'home'%}?delete={{item.id}}" class="col-md-1 btn btn-outline-danger" style="padding-left: 10px;margin-left: 10px; ">
+				-
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+		
+</body>
+</html>
